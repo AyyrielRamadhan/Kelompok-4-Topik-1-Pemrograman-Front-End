@@ -5,101 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pendaftaran Peserta</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 650px;
-            margin: 30px auto;
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        h2 {
-            text-align: center;
-            color: #1a237e;
-            margin-bottom: 5px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-        .required {
-            color: #e53935;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 11px 14px;
-            border: 1.5px solid #dde;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border 0.2s;
-            box-sizing: border-box;
-        }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #3f51b5;
-            box-shadow: 0 0 0 3px rgba(63,81,181,0.1);
-        }
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        .file-area {
-            border: 2px dashed #bbb;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            background: #fafafa;
-        }
-        input[type="file"] {
-            font-size: 14px;
-        }
-        .btn {
-            width: 100%;
-            padding: 13px;
-            background: #3f51b5;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.2s;
-        }
-        .btn:hover {
-            background: #303f9f;
-        }
-        .btn-reset {
-            background: #eee;
-            color: #555;
-            margin-top: 8px;
-        }
-        .btn-reset:hover {
-            background: #ddd;
-        }
+       :root {
+    --primary: #3f51b5;
+    --primary-hover: #3242a8;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --bg: #f7f8fa;
+    --white: #ffffff;
+}
+
+/* BASE */
+body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    margin: 0;
+    padding: 24px;
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 620px;
+    margin: 40px auto;
+    background: var(--white);
+    padding: 32px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+/* HEADER */
+h2 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+/* FORM */
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.required {
+    color: #dc2626;
+}
+
+/* INPUT */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.08);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* FILE */
+.file-area {
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    padding: 18px;
+    text-align: center;
+    background: #fcfcfd;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* BUTTON */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s ease, transform 0.05s ease;
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* RESET BUTTON */
+.btn-reset {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    margin-top: 8px;
+}
+
+.btn-reset:hover {
+    background: #f3f4f6;
+}
     </style>
 </head>
 <body>
