@@ -56,7 +56,6 @@
             }
         }
 
-        /* Garis grid futuristik animasi di background */
         body::after {
             content: "";
             position: fixed;
@@ -77,7 +76,6 @@
             50% { opacity: 0.45; background-size: 55px 55px; }
         }
 
-        /* Partikel cahaya kecil bergerak (animasi tambahan) */
         .particle {
             position: fixed;
             width: 3px;
@@ -103,7 +101,7 @@
             100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
         }
 
-        /* --- Container Card Utama (Mewah, sederhana, futuristik) --- */
+        /* --- Container Card Utama --- */
         .container {
             position: relative;
             z-index: 10;
@@ -121,7 +119,6 @@
             color: #e2e8f0;
         }
 
-        /* Heading dengan aksen futuristik */
         h2 {
             text-align: center;
             color: #ffffff;
@@ -152,7 +149,6 @@
             filter: drop-shadow(0 0 8px #3b82f6);
         }
 
-        /* Tabel dengan gaya premium */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -167,7 +163,7 @@
         }
 
         table, th, td {
-            border: none; /* border modern via cell saja */
+            border: none;
         }
 
         th {
@@ -196,12 +192,25 @@
             vertical-align: middle;
         }
 
-        /* Baris terakhir tanpa border bottom */
         tr:last-child td {
             border-bottom: none;
         }
 
-        /* Badge file elegan */
+        /* Style untuk gambar KTM yang ditampilkan */
+        .ktm-preview {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            max-height: 260px;
+            border-radius: 14px;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            object-fit: contain;
+            background: rgba(0,0,0,0.2);
+        }
+
         .file-badge {
             background: rgba(79, 114, 255, 0.18);
             padding: 6px 16px;
@@ -224,7 +233,6 @@
             color: white;
         }
 
-        /* Tombol kembali dengan efek futuristik */
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -271,7 +279,6 @@
             transform: translateY(-2px);
         }
 
-        /* Teks peringatan */
         p[style*="color:red"] {
             background: rgba(255, 80, 80, 0.12);
             backdrop-filter: blur(12px);
@@ -282,7 +289,6 @@
             font-weight: 450;
         }
 
-        /* Responsive */
         @media (max-width: 550px) {
             .container {
                 padding: 25px 20px;
@@ -299,7 +305,6 @@
 </head>
 <body>
 
-<!-- Partikel animasi tambahan di luar wadah -->
 <div class="particle"></div>
 <div class="particle"></div>
 <div class="particle"></div>
@@ -319,11 +324,16 @@
         
         $tgl_format = date("d F Y", strtotime($tgl_lahir));
         
+        // Penanganan file upload dan tampilan gambar
         $file_info = "Tidak ada file diupload";
+        $gambar_html = ""; // untuk menampung tag img jika file gambar berhasil
+        
         if (isset($_FILES['scan_ktm']) && $_FILES['scan_ktm']['error'] === 0) {
             $file_name = $_FILES['scan_ktm']['name'];
             $file_size = $_FILES['scan_ktm']['size'];
+            $file_tmp  = $_FILES['scan_ktm']['tmp_name'];
             
+            // Format ukuran file
             if ($file_size < 1024) {
                 $size_display = $file_size . " bytes";
             } elseif ($file_size < 1048576) {
@@ -332,7 +342,33 @@
                 $size_display = round($file_size / 1048576, 2) . " MB";
             }
             
-            $file_info = $file_name . " <span class='file-badge'>" . $size_display . "</span>";
+            $file_info = htmlspecialchars($file_name) . " <span class='file-badge'>" . $size_display . "</span>";
+            
+            // Tentukan folder upload (pastikan folder 'uploads' sudah ada dan writable)
+            $upload_dir = "uploads/";
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0755, true);
+            }
+            
+            // Buat nama unik agar tidak bentrok, tapi tetap ekstensi asli
+            $ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+            $allowed_images = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'];
+            
+            if (in_array($ext, $allowed_images)) {
+                $new_file_name = uniqid('ktm_', true) . '.' . $ext;
+                $destination = $upload_dir . $new_file_name;
+                
+                if (move_uploaded_file($file_tmp, $destination)) {
+                    // Tampilkan gambar dengan class ktm-preview (menyesuaikan ukuran)
+                    $gambar_html = '<img src="' . htmlspecialchars($destination) . '" alt="Scan KTM" class="ktm-preview">';
+                } else {
+                    // Jika gagal pindahkan, tetap tampilkan info file tanpa gambar
+                    $gambar_html = '<p style="color:#fbbf24; margin-top:5px;">⚠️ Gagal menyimpan gambar, tetapi file terdeteksi.</p>';
+                }
+            } else {
+                // Bukan file gambar, tampilkan info file saja
+                $gambar_html = '<p style="color:#94a3b8; margin-top:5px;">📎 File non-gambar diunggah (tidak ditampilkan).</p>';
+            }
         }
     ?>
 
@@ -359,7 +395,15 @@
         </tr>
         <tr>
             <th>Scan KTM</th>
-            <td><?php echo $file_info; ?></td>
+            <td>
+                <?php echo $file_info; ?>
+                <?php 
+                // Tampilkan gambar jika ada
+                if (!empty($gambar_html)) {
+                    echo $gambar_html;
+                }
+                ?>
+            </td>
         </tr>
     </table>
 
@@ -370,8 +414,7 @@
     ?>
 
     <br>
-    <!-- Link kembali ke formulir (disesuaikan dengan file asal, Anda bisa ganti nama file sesuai kebutuhan) -->
-    <a href="del-pro.php" class="btn-back">⬅ Kembali ke Formulir</a>
+    <a href="input_form.php" class="btn-back">⬅ Kembali ke Formulir</a>
 </div>
 
 </body>
