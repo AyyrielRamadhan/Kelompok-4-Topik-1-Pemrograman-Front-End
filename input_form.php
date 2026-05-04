@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Palette Warna Baru: Deep Ocean & Electric Indigo */
-            --bg-body: #0f172a;
             --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -37,7 +36,6 @@
             color: var(--text-bright);
         }
 
-        /* CONTAINER DENGAN EFEK GLASSMORPHISM */
         .container {
             width: 100%;
             max-width: 550px;
@@ -52,7 +50,6 @@
             overflow: hidden;
         }
 
-        /* Aksen Cahaya di Sudut */
         .container::before {
             content: "";
             position: absolute;
@@ -83,7 +80,6 @@
             margin-bottom: 35px;
         }
 
-        /* FORM ELEMENTS */
         .form-group {
             margin-bottom: 22px;
         }
@@ -102,7 +98,9 @@
             color: #fb7185;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 14px 18px;
             border-radius: 14px;
@@ -113,20 +111,20 @@
             font-family: inherit;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
             border-color: var(--primary-neon);
             background: rgba(255, 255, 255, 0.05);
             box-shadow: 0 0 15px rgba(129, 140, 248, 0.2);
         }
 
-        /* Khusus Dropdown Select */
         select option {
             background: var(--bg-body);
             color: var(--text-bright);
         }
 
-        /* FILE AREA */
         .file-area {
             border: 2px dashed var(--glass-border);
             border-radius: 14px;
@@ -140,7 +138,6 @@
             background: rgba(192, 132, 252, 0.05);
         }
 
-        /* BUTTONS */
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -186,78 +183,79 @@
             border-color: var(--text-dim);
         }
 
-        /* Placeholder color */
         ::placeholder {
             color: #475569;
         }
 
-        /* Custom scrollbar for textarea */
         textarea::-webkit-scrollbar {
             width: 6px;
         }
+
         textarea::-webkit-scrollbar-thumb {
             background: var(--glass-border);
             border-radius: 10px;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Formulir Pendaftaran</h2>
-    <p class="subtitle">Bergabunglah dengan komunitas IT masa depan</p>
+    <div class="container">
+        <h2>Formulir Pendaftaran</h2>
+        <p class="subtitle">Bergabunglah dengan komunitas IT masa depan</p>
 
-    <form action="proses.php" method="POST" enctype="multipart/form-data">
+        <form action="proses.php" method="POST" enctype="multipart/form-data">
 
-        <div class="form-group">
-            <label for="nama">Nama Lengkap <span class="required">*</span></label>
-            <input type="text" id="nama" name="nama" placeholder="Masukkan nama sesuai identitas" required>
-        </div>
+            <div class="form-group">
+                <label for="nama">Nama Lengkap <span class="required">*</span></label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama sesuai identitas" required>
+            </div>
 
-        <div class="form-group">
-            <label for="email">Email Aktif <span class="required">*</span></label>
-            <input type="email" id="email" name="email" placeholder="nama@email.com" required>
-        </div>
+            <div class="form-group">
+                <label for="email">Email Aktif <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+            </div>
 
-        <div class="form-group">
-            <label for="tgl_lahir">Tanggal Lahir <span class="required">*</span></label>
-            <input type="date" id="tgl_lahir" name="tgl_lahir" required>
-        </div>
+            <div class="form-group">
+                <label for="tgl_lahir">Tanggal Lahir <span class="required">*</span></label>
+                <input type="date" id="tgl_lahir" name="tgl_lahir" required>
+            </div>
 
-        <div class="form-group">
-            <label for="prodi">Program Studi <span class="required">*</span></label>
-            <select id="prodi" name="prodi" required>
-                <option value="">Pilih Program Studi</option>
-                <option value="Teknik Informatika">Teknik Informatika</option>
-                <option value="Sistem Informasi">Sistem Informasi</option>
-                <option value="Manajemen Informatika">Manajemen Informatika</option>
-                <option value="Teknik Komputer">Teknik Komputer</option>
-                <option value="Bisnis Digital">Bisnis Digital</option>
-            </select>
-        </div>
+            <div class="form-group">
+                <label for="prodi">Program Studi <span class="required">*</span></label>
+                <select id="prodi" name="prodi" required>
+                    <option value="">Pilih Program Studi</option>
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Sistem Informasi">Sistem Informasi</option>
+                    <option value="Manajemen Informatika">Manajemen Informatika</option>
+                    <option value="Teknik Komputer">Teknik Komputer</option>
+                    <option value="Bisnis Digital">Bisnis Digital</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="alamat">Alamat Domisili <span class="required">*</span></label>
-            <textarea id="alamat" name="alamat" rows="3" placeholder="Tuliskan alamat lengkap..." required></textarea>
-        </div>
+            <div class="form-group">
+                <label for="alamat">Alamat Domisili <span class="required">*</span></label>
+                <textarea id="alamat" name="alamat" rows="3" placeholder="Tuliskan alamat lengkap..." required></textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="scan_ktm">Scan Kartu Mahasiswa <span class="required">*</span></label>
-            <div class="file-area">
-                <input type="file" id="scan_ktm" name="scan_ktm" accept="image/*,.pdf" required>
-                <div style="margin-top: 10px;">
-                    <small style="color:var(--text-dim);">Format PDF/JPG/PNG (Maks 2MB)</small>
+            <div class="form-group">
+                <label for="scan_ktm">Scan Kartu Mahasiswa <span class="required">*</span></label>
+                <div class="file-area">
+                    <input type="file" id="scan_ktm" name="scan_ktm" accept="image/*,.pdf" required>
+                    <div style="margin-top: 10px;">
+                        <small style="color:var(--text-dim);">Format PDF/JPG/PNG (Maks 2MB)</small>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="btn-group">
-            <button type="submit" class="btn btn-submit">Kirim Data Sekarang</button>
-            <button type="reset" class="btn btn-reset">Kosongkan Form</button>
-        </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-submit">Kirim Data Sekarang</button>
+                <button type="reset" class="btn btn-reset">Kosongkan Form</button>
+            </div>
 
-    </form>
-</div>
+        </form>
+    </div>
 
 </body>
+
 </html>
